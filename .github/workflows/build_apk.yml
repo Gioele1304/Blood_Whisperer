@@ -2,7 +2,7 @@ name: Build Flutter APK
 
 on:
   push:
-    branches: [ "main" ] # O "master" a seconda del tuo branch
+    branches: [ "main", "master" ]
 
 jobs:
   build:
@@ -23,11 +23,14 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Build APK
-        run: flutter build apk --release
+      - name: Generate Android files and Build
+        run: |
+          # Rigenera la cartella android mancante usando flutter create
+          flutter create . --platforms=android
+          
+          # Scarica le dipendenze e compila l'APK di rilascio
+          flutter pub get
+          flutter build apk --release
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
