@@ -23,7 +23,7 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
-      - name: Install dependencies
+      - name: Get dependencies
         run: flutter pub get
 
       - name: Build APK
