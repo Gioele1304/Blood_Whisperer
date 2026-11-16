@@ -41,6 +41,9 @@ jobs:
       - name: Install Android platform 36
         run: sdkmanager "platforms;android-36"
 
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
       - name: Set compileSdk to 36
         run: |
           python3 - <<'PY'
@@ -48,8 +51,8 @@ jobs:
           import re
 
           files = [
-              Path("android/app/build.gradle.kts"),
               Path("android/app/build.gradle"),
+              Path("android/app/build.gradle.kts"),
           ]
 
           for path in files:
@@ -69,15 +72,47 @@ jobs:
                   break
           else:
               raise SystemExit(
-                  "Non trovo una riga compileSdk nei file Gradle Android"
+                  "Non trovo una riga compileSdk nei file Gradle dell'app"
+              )
+          PY
+
+      - name: Set plugin compileSdk to 36
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          pub_cache = Path.home() / ".pub-cache" / "hosted" / "pub.dev"
+          files = []
+
+          for pattern in ("*/android/build.gradle", "*/android/build.gradle.kts"):
+              files.extend(pub_cache.glob(pattern))
+
+          changed = 0
+
+          for path in files:
+              text = path.read_text()
+              updated, count = re.subn(
+                  r"(?m)^(\s*compileSdk(?:Version)?\s*(?:=\s*)?).+$",
+                  r"\g<1>36",
+                  text,
+              )
+
+              if count:
+                  path.write_text(updated)
+                  changed += 1
+                  print(f"Impostato compileSdk a 36 in {path}")
+
+          if changed == 0:
+              raise SystemExit(
+                  "Non ho trovato righe compileSdk da aggiornare nei plugin"
               )
           PY
 
       - name: Verify compileSdk
-        run: grep -n "compileSdk" android/app/build.gradle*
-
-      - name: Install Flutter dependencies
-        run: flutter pub get
+        run: |
+          grep -n "compileSdk" android/app/build.gradle* || true
+          grep -R -n "compileSdk" "$HOME/.pub-cache/hosted/pub.dev/file_picker-"*/android/ || true
 
       - name: Build APK
         run: flutter build apk --debug
