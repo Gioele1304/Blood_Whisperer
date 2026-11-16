@@ -53,20 +53,28 @@ jobs:
           ]
 
           for path in files:
-              if path.exists():
-                  text = path.read_text()
-                  updated, count = re.subn(
-                      r"(?m)^(\s*compileSdk(?:Version)?\s*(?:=\s*)?).+$",
-                      r"\g<1>36",
-                      text,
-                  )
-                  if count:
-                      path.write_text(updated)
-                      print(f"Impostato compileSdk a 36 in {path}")
-                      break
+              if not path.exists():
+                  continue
+
+              text = path.read_text()
+              updated, count = re.subn(
+                  r"(?m)^(\s*compileSdk(?:Version)?\s*(?:=\s*)?).+$",
+                  r"\g<1>36",
+                  text,
+              )
+
+              if count:
+                  path.write_text(updated)
+                  print(f"Impostato compileSdk a 36 in {path}")
+                  break
           else:
-              raise SystemExit("Non trovo una riga compileSdk nei file Gradle Android")
+              raise SystemExit(
+                  "Non trovo una riga compileSdk nei file Gradle Android"
+              )
           PY
+
+      - name: Verify compileSdk
+        run: grep -n "compileSdk" android/app/build.gradle*
 
       - name: Install Flutter dependencies
         run: flutter pub get
@@ -79,3 +87,4 @@ jobs:
         with:
           name: app-debug
           path: build/app/outputs/flutter-apk/app-debug.apk
+          
