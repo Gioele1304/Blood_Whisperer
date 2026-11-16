@@ -33,6 +33,16 @@ jobs:
       - name: Generate Android files
         run: flutter create --platforms=android .
 
+      - name: Install Android SDK 36
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform 36
+        run: sdkmanager "platforms;android-36"
+
+      - name: Set compileSdk to 36
+        run: sed -i 's/compileSdk = flutter.compileSdkVersion/compileSdk = 36/' android/app/build.gradle.kts
+        
+
       - name: Install Flutter dependencies
         run: flutter pub get
 
