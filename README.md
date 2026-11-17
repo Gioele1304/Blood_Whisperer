@@ -5,7 +5,9 @@
  [![Flutter](https://img.shields.io/badge/Flutter-3.22+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.3+-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
 [![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-brightgreen?style=for-the-badge)](https://flutter.dev) 
+
 [![Privacy-First](https://img.shields.io/badge/Privacy-First-red?style=for-the-badge)](#-privacy-first)
 [![Local-First](https://img.shields.io/badge/Local-First-purple?style=for-the-badge)](#-local-first)
 
