@@ -1,170 +1,1151 @@
 # 🩸 Blood Whisperer
-> *Ascolta il tuo corpo, comprendi il tuo ciclo.*
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.22+-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.3+-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Platform](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-brightgreen?style=for-the-badge)](https://flutter.dev)
+> *Ascolta il tuo corpo. Comprendi il tuo ciclo. Prendi il controllo della tua salute riproduttiva.*
 
-**Blood Whisperer** è un'applicazione cross-platform moderna e privacy-first per il tracciamento del ciclo femminile, della salute ormonale e del benessere riproduttivo. Replica ed estende le funzionalità di app commerciali come **Flo**, integrando algoritmi statistici avanzati, gestione delle fasi della vita, grafici analitici e un assistente conversazionale integrato.
-
----
-
-## 🌟 Caratteristiche Principali
-
-- **4 Modalità Operative:** Si adatta dinamicamente a Cycle Tracking, Trying To Conceive, Pregnancy e Perimenopause.
-- **Daily Logging Immutabile:** Tracciamento dettagliato di sintomi, umore, fluidi corporei, biometria (BBT), sonno, idratazione e attività sessuale.
-- **Smart Analytics:** Grafici interattivi per la Temperatura Corporea Basale (BBT), l'andamento del peso e la frequenza dei sintomi.
-- **Assistente Conversazionale In-App:** Chatbot locale contestuale che fornisce risposte, consigli lifestyle e informazioni mediche di base.
-- **Importer Dati Flo:** Modulo di migrazione integrato per leggere e convertire export CSV/JSON da Flo.
+https://img.shields.io/badge/Flutter-3.22+-02569B?style=for-the-badge&logo=flutter&logoColor=white](https://flutter.dev)
+https://img.shields.io/badge/Dart-3.3+-0175C2?style=for-the-badge&logo=dart&logoColor=white](https://dart.dev)
+https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge](https://opensource.org/licenses/MIT)
+https://img.shields.io/badge/Platform-Android%20|%20iOS%20|%20Web-brightgreen?style=for-the-badge](https://flutter.dev)
+https://img.shields.io/badge/Privacy-First-red?style=for-the-badge]()
+https://img.shields.io/badge/Local-First-purple?style=for-the-badge]()
 
 ---
 
-## 🔄 Le 4 Modalità Operative
+## 🌸 What is Blood Whisperer?
 
-L'app adatta dinamicamente dashboard, calendari, algoritmi di calcolo e risposte dell'assistente in base alla fase della vita attiva:
+**Blood Whisperer** is a modern, privacy-first reproductive health platform designed to help users monitor, understand and manage every stage of reproductive life.
 
-| Modalità | Focus Principale | Funzionalità Chiave |
-| :--- | :--- | :--- |
-| 🌸 **Cycle Tracking** | Monitoraggio standard del ciclo | Previsione mestruazioni, calcolo fasi ormonali e durata. |
-| 🪺 **Trying To Conceive** | Ricerca della gravidanza | Evidenziazione finestra fertile, picchi LH e rialzo termico BBT. |
-| 🤰 **Pregnancy** | Gestione della gestazione | Conteggio settimane/giorni, trimestre e Data Presunta Parto (DPP). |
-| 🍂 **Perimenopause** | Transizione ormonale | Rilevamento cicli irregolari, tracciamento vampate e variazioni. |
+Unlike traditional menstrual trackers focused only on period prediction, Blood Whisperer aims to become a complete ecosystem that combines:
 
----
+- 🩸 Menstrual cycle tracking
+- 🪺 Fertility awareness
+- 💊 Contraception management
+- 🤰 Pregnancy support
+- 🍂 Perimenopause monitoring
+- ❤️ Sexual health tracking
+- 📊 Advanced analytics
+- 🔒 Data ownership and privacy
 
-## 📝 Tracciamento Giornaliero (Daily Log)
-
-Ogni log giornaliero è immutabile e gestito tramite **upsert per data** per evitare sovrapposizioni e duplicati:
-
-- **Sintomi Fisici:** Crampi, mal di testa, gonfiore, acne, sensibilità al seno, affaticamento, mal di schiena, nausea, voglie, insonnia.
-- **Umore & Stato Mentale:** Felicità, calma, ansia, irritabilità, tristezza, energia, stanchezza.
-- **Fluidi Corporei:**
-  - *Flusso Mestruale:* Spotting, Leggero, Medio, Abbondante.
-  - *Muco Cervicale:* Asciutto, Appiccicoso, Cremoso, Acquoso, Filante.
-- **Biometria & Stile di Vita:** Temperatura Corporea Basale (BBT con supporto decimale), Peso, Idratazione, Sonno (ore e qualità 1-5).
-- **Attività:** Attività sessuale (protetta/non protetta) e note libere.
+The project follows a **Local-First Architecture**, meaning users retain full ownership of their data and can continue using the application even without an internet connection.
 
 ---
 
-## 🧮 Algoritmi Intelligenti & Fisiologia
+# 🎯 Vision
 
-- **Statistiche Ciclo:** Calcolo della media e della deviazione standard. Soglia di regolarità impostata a deviazione standard <= 4 giorni.
-- **Finestra Fertile:** Calcolata come i 5 giorni precedenti l'ovulazione più il giorno stesso (6 giorni totali).
-- **Fasi Fisiologiche:**
-  1. *Mestruale:* Dal giorno 1 alla durata mestruazioni (Estrogeni/Progesterone bassi).
-  2. *Follicolare:* Dalla fine delle mestruazioni fino alla fase ovulatoria (Salita Estrogeni via FSH).
-  3. *Ovulatoria:* Picco LH ed Estrogeni (1 giorno prima / 1 giorno dopo l'ovulazione).
-  4. *Luteale:* Dall'ovulazione al termine del ciclo (Progesterone dominante).
-- **Rilevamento Ovulazione (BBT):** Identificato tramite rialzo termico di almeno 0.2°C sostenuto per 3 giorni consecutivi rispetto ai 3 giorni precedenti.
-- **Pattern Perimenopausa:** Attivazione automatica degli alert se deviazione standard > 7 giorni o se la differenza tra ciclo massimo e minimo > 14 giorni su almeno 6 cicli consecutivi.
-- **Gravidanza (Regola di Naegele):** Data Presunta Parto = LMP + 280 giorni.
+Most reproductive health applications focus on one thing:
 
----
+> Predicting the next period.
 
-## 📥 Importer Dati da Flo
+Blood Whisperer goes much further.
 
-Ripristina o migra i tuoi dati dall'app Flo in totale sicurezza e in locale:
+The mission of the project is to build a comprehensive reproductive health platform capable of supporting users throughout every major stage of reproductive life:
 
-- **Formati Supportati:** CSV e JSON.
-- **Parsing Flessibile:** Supporta formati data multipli (YYYY-MM-DD, DD/MM/YYYY, DD-MM-YYYY), sia punto che virgola nei decimali.
-- **Dizionario Italiano Integrato:** Mappatura automatica di termini e keyword (es. spotting, light, heavy, cramps).
-- **Report Finale:** Output dettagliato con totale righe, elementi importati, saltati ed errori.
+```text
+Puberty
+    ↓
+Cycle Tracking
+    ↓
+Fertility Awareness
+    ↓
+Trying To Conceive
+    ↓
+Pregnancy
+    ↓
+Postpartum Recovery
+    ↓
+Breastfeeding
+    ↓
+Perimenopause
+    ↓
+Menopause Transition
+```
 
----
+Instead of simply predicting dates, Blood Whisperer helps users:
 
-## 💬 Assistente Conversazionale In-App
+✅ Understand body patterns
 
-Un chatbot contestuale con risposta rapida (~400ms) che analizza lo stato corrente e restituisce risposte strutturate con **testo principale**, **suggerimenti** e **quick replies**:
+✅ Track symptoms over time
 
-- **Triggers:** Spiegazione fase, finestra fertile, settimane di gravidanza, analisi sintomi, andamento BBT, supporto umore/ansia, perimenopausa.
-- **Disclaimer:** Ogni risposta include un avviso informativo (non costituisce diagnosi medica).
+✅ Discover health correlations
 
----
+✅ Monitor fertility indicators
 
-## 🛠️ Stack Tecnologico
+✅ Organize reproductive health records
 
-| Componente | Tecnologia | Versione / Dettaglio |
-| :--- | :--- | :--- |
-| **Framework** | Flutter | >= 3.22 (Dart >= 3.3) |
-| **State Management** | Riverpod | v2.5 (StateNotifierProvider, FutureProvider) |
-| **Database Locale** | Drift / SQLite | v2.16 (Type-safe, local-first) |
-| **Analytics & Grafici** | fl_chart | v0.68 |
-| **Calendario** | table_calendar | v3.1 |
-| **I/O & Utilities** | file_picker, csv, intl | File selection, CSV Parsing, Date Formatting |
+✅ Export meaningful information to healthcare professionals
 
 ---
 
-## 🏗️ Architettura & Struttura del Progetto
+# 💡 Core Principles
 
-Il progetto segue un’architettura a livelli con dipendenze gerarchiche unidirezionali per garantire **testabilità** e **modularità**:
+## 🔒 Privacy First
 
-- `lib/main.dart` - Entry Point con ProviderScope
-- `lib/app.dart` - MaterialApp & AppTheme
-- `lib/models/` - Domain Models & Enums (DailyLog, Cycle, AppMode, FloImport)
-- `lib/database/` - Drift Schema, Tables & DAOs (app_database.dart)
-- `lib/services/` - Business Logic (Cycle Calculation, Flo Importer, Chatbot)
-- `lib/providers/` - Riverpod Providers (Database, Log, Cycle, AppState)
-- `lib/features/` - Moduli Funzionali (Chat, Daily Log Form, Analytics, Flo Import)
-- `lib/ui/screens/` - Home, Dashboard, Calendar, Settings, Onboarding
-- `lib/ui/widgets/` - CycleRing, PhaseCard, FertileBadge, MetricTile
-- `lib/ui/theme/` - AppColors, AppTextStyles, AppTheme
-- `lib/utils/` - Helpers (DateUtils, Constants, Validators)
+Health data belongs exclusively to the user.
 
----
+Blood Whisperer is designed around the principle that reproductive health information is among the most sensitive categories of personal data.
 
-## 🚀 Setup & Installazione
+### Requirements
 
-### Prerequisiti
-- **Flutter SDK:** >= 3.22
-- **Android:** minSdkVersion 21
-- **iOS:** Platform 12.0
-
-### Step di Installazione
-
-1. Clona il repository:
-   git clone https://github.com/tuo-utente/blood_whisperer.git
-   cd blood_whisperer
-
-2. Installa le dipendenze:
-   flutter pub get
-
-3. Genera il codice del Database (Drift):
-   dart run build_runner build --delete-conflicting-outputs
-
-4. Verifica il progetto ed eseguilo:
-   flutter analyze
-   flutter run
+- No advertising SDKs
+- No tracking SDKs
+- No behavioral profiling
+- No hidden analytics
+- No data resale
+- No third-party data brokers
 
 ---
 
-## 📜 Comandi Utili CLI
+## 📶 Local First
 
-- Watch mode per la generazione codice: `dart run build_runner watch --delete-conflicting-outputs`
-- Esecuzione dei Test: `flutter test`
-- Avvio su Browser Web: `flutter run -d chrome`
-- Build di Release Android: `flutter build apk --release`
-- Build di Release iOS: `flutter build ios --release`
+All core functionality works completely offline.
 
----
+Features must remain available even without:
 
-## 🗺️ Roadmap di Sviluppo
+- Internet access
+- Cloud synchronization
+- External API dependencies
 
-- **v1.0 (Current):** 4 Modalità operative, Drift DB, Algoritmi Ciclo/BBT, Importatore Flo, Dashboard & Analytics, Chatbot locale.
-- **v1.1:** Notifiche push locali (promemoria log/pillola), Widget Home Screen, Backup/Export cifrato, Onboarding interattivo.
-- **v2.0:** Sincronizzazione Cloud E2EE (Opzionale), Integrazione Wearable/Smartwatch, AI Generativa avanzata, Grafici ML predittivi.
+The user remains in control.
 
 ---
 
-## ⚠️ Disclaimer Medico
+## 🧠 Explainable Algorithms
 
-> **IMPORTANTE:** Blood Whisperer è uno strumento informativo e di auto-monitoraggio. **Non fornisce diagnosi mediche**, non sostituisce il parere di un medico professionista e **non deve essere utilizzato come metodo contraccettivo**. Per qualsiasi dubbio o sintomo legato alla salute riproduttiva, consultare un medico qualificato.
+Predictions should never be black boxes.
+
+Whenever Blood Whisperer provides:
+
+- a fertility estimate
+- an ovulation estimate
+- a symptom correlation
+- a cycle prediction
+
+the application must be able to explain:
+
+- which data was used
+- how the result was generated
+- how reliable the result is
 
 ---
 
-## 📄 Licenza & Contatti
+## 🩺 Medical Responsibility
 
-Distribuito sotto licenza **MIT**. Vedi `LICENSE` per ulteriori informazioni.
+Blood Whisperer is a self-monitoring and educational platform.
 
-- **Author:** Gioele Valzolgher
-- **Repository:** https://github.com/tuo-utente/blood_whisperer
+The application:
+
+✅ Supports health awareness
+
+✅ Helps identify patterns
+
+✅ Organizes health data
+
+✅ Provides educational explanations
+
+The application does NOT:
+
+❌ Diagnose medical conditions
+
+❌ Provide medical treatment
+
+❌ Replace professional medical advice
+
+❌ Guarantee pregnancy
+
+❌ Guarantee contraception effectiveness
+
+---
+
+# 🌱 Reproductive Life Modes
+
+The application dynamically adapts to different reproductive goals.
+
+Different modes affect:
+
+- Dashboard
+- Analytics
+- Available trackers
+- Insights
+- Assistant responses
+- Pregnancy and fertility calculations
+
+---
+
+## 🌸 Cycle Tracking
+
+Standard menstrual cycle monitoring.
+
+### Features
+
+- Period prediction
+- Cycle statistics
+- Historical trends
+- Hormonal phase estimation
+- Symptom tracking
+- Mood tracking
+- Calendar view
+
+---
+
+## 🪺 Trying To Conceive
+
+For users attempting pregnancy.
+
+### Features
+
+- Fertile window estimation
+- Ovulation prediction
+- Ovulation confirmation
+- Basal Body Temperature analysis
+- Cervical mucus tracking
+- LH test tracking
+- Fertility analytics
+
+---
+
+## 🛡️ Avoid Pregnancy
+
+Fertility awareness focused mode.
+
+### Features
+
+- Fertility probability estimation
+- Fertility education
+- Contraceptive monitoring
+- Contraceptive adherence tracking
+- Fertility trend analysis
+
+### Important
+
+This mode is informational only.
+
+Blood Whisperer must never claim:
+
+- Safe days
+- Guaranteed protection
+- Reliable contraception
+
+---
+
+## 🤰 Pregnancy
+
+Pregnancy monitoring and organization.
+
+### Features
+
+- Gestational week calculation
+- Gestational day calculation
+- Due date estimation
+- Trimester tracking
+- Symptom monitoring
+- Pregnancy appointments
+- Ultrasound records
+
+---
+
+## 🍂 Perimenopause
+
+Hormonal transition support.
+
+### Features
+
+- Irregular cycle detection
+- Cycle variability tracking
+- Hot flash monitoring
+- Amenorrhea tracking
+- Mood monitoring
+- Long-term trend analysis
+
+---
+
+# 👤 User Profile System
+
+Every user has a detailed health profile.
+
+## Personal Information
+
+```text
+Name
+
+Date of Birth
+
+Height
+
+Weight
+
+Language
+
+Time Zone
+```
+
+---
+
+## Reproductive Goal
+
+```text
+Track Cycle
+
+Trying To Conceive
+
+Avoid Pregnancy
+
+Pregnancy
+
+Perimenopause
+```
+
+---
+
+## Health Conditions
+
+Supported health conditions:
+
+```text
+PCOS
+
+Endometriosis
+
+Adenomyosis
+
+Fibroids
+
+Thyroid Disorders
+
+Insulin Resistance
+
+Postpartum
+
+Breastfeeding
+```
+
+These conditions influence analytics and predictions.
+
+---
+
+# 📝 Daily Logging System
+
+The Daily Log is the central data collection component.
+
+All advanced analytics are derived from daily entries.
+
+---
+
+## 🤒 Symptoms
+
+Examples:
+
+```text
+Cramps
+
+Headache
+
+Bloating
+
+Acne
+
+Fatigue
+
+Nausea
+
+Back Pain
+
+Breast Tenderness
+
+Insomnia
+
+Cravings
+```
+
+Intensity Scale:
+
+```text
+0 → Not Present
+
+5 → Extremely Severe
+```
+
+---
+
+## 😊 Mood & Wellbeing
+
+Tracking includes:
+
+```text
+Happy
+
+Calm
+
+Focused
+
+Energetic
+
+Anxious
+
+Irritable
+
+Sad
+
+Tired
+```
+
+---
+
+## 🩸 Menstrual Flow
+
+Levels:
+
+```text
+Spotting
+
+Light
+
+Medium
+
+Heavy
+```
+
+---
+
+## 💧 Cervical Mucus
+
+Types:
+
+```text
+Dry
+
+Sticky
+
+Creamy
+
+Watery
+
+Egg White
+```
+
+---
+
+## 📊 Biometrics
+
+Supported measurements:
+
+```text
+Basal Body Temperature
+
+Weight
+
+Hydration
+
+Sleep Duration
+
+Sleep Quality
+```
+
+---
+
+# ❤️ Sexual Health Module
+
+A dedicated privacy-focused sexual wellness tracker.
+
+---
+
+## Supported Activities
+
+```text
+Protected Intercourse
+
+Unprotected Intercourse
+
+Withdrawal
+
+Masturbation
+
+Sex Toy Usage
+```
+
+---
+
+## Optional Metadata
+
+```text
+Orgasm
+
+Pain
+
+Libido
+
+Notes
+```
+
+---
+
+## Design Goals
+
+Track relationships between:
+
+- Sexual activity
+- Fertility
+- Mood
+- Hormonal changes
+- Reproductive health
+
+while maintaining maximum privacy.
+
+---
+
+# 💊 Contraception Management
+
+Blood Whisperer includes a complete contraception tracking module.
+
+---
+
+## Supported Methods
+
+### Hormonal
+
+```text
+Combined Pill
+
+Mini Pill
+
+Patch
+
+Ring
+
+Implant
+
+Injection
+```
+
+### Devices
+
+```text
+Copper IUD
+
+Hormonal IUD
+```
+
+### Barrier Methods
+
+```text
+Condom
+
+Diaphragm
+```
+
+---
+
+## Features
+
+```text
+Start Date
+
+End Date
+
+Adherence Monitoring
+
+Missed Doses
+
+Historical Changes
+
+Contraception Timeline
+```
+
+---
+
+# 🪺 Fertility Engine
+
+One of the most advanced components of the application.
+
+The engine combines multiple fertility indicators rather than relying exclusively on calendar calculations.
+
+---
+
+## Inputs
+
+```text
+Cycle History
+
+Basal Body Temperature
+
+Cervical Mucus
+
+LH Tests
+
+Sexual Activity
+```
+
+---
+
+## Outputs
+
+```text
+Fertile Window
+
+Ovulation Estimate
+
+Ovulation Confirmation
+
+Confidence Score
+
+Cycle Reliability Index
+```
+
+---
+
+## Ovulation Confirmation
+
+The system may use:
+
+```text
+Temperature Shift
+
+Consecutive Elevated BBT
+
+Fertility Markers
+```
+
+to distinguish between:
+
+```text
+Estimated Ovulation
+
+Confirmed Ovulation
+```
+
+---
+
+# 🤰 Pregnancy Module
+
+Comprehensive gestational tracking.
+
+---
+
+## Pregnancy Timeline
+
+Tracks:
+
+```text
+Current Week
+
+Current Day
+
+Current Trimester
+
+Estimated Due Date
+```
+
+---
+
+## Symptoms
+
+Examples:
+
+```text
+Nausea
+
+Vomiting
+
+Heartburn
+
+Fatigue
+
+Pelvic Discomfort
+```
+
+---
+
+## Medical Records
+
+```text
+Appointments
+
+Blood Tests
+
+Ultrasounds
+
+Medical Notes
+```
+
+---
+
+# 🍂 Perimenopause Module
+
+Perimenopause support is often neglected by health applications.
+
+Blood Whisperer treats it as a first-class feature.
+
+---
+
+## Tracking Areas
+
+```text
+Hot Flashes
+
+Night Sweats
+
+Mood Changes
+
+Brain Fog
+
+Memory Issues
+
+Cycle Variability
+
+Amenorrhea
+```
+
+---
+
+# 🧮 Delay Analysis Engine
+
+When a cycle exceeds expected duration, Blood Whisperer performs contextual analysis.
+
+---
+
+## Factors Evaluated
+
+```text
+Stress
+
+Travel
+
+Illness
+
+Weight Changes
+
+Sleep Quality
+
+Medication Changes
+
+Contraceptive Changes
+```
+
+---
+
+## Outputs
+
+```text
+Potential Factors
+
+Correlation Score
+
+Educational Explanations
+```
+
+No medical diagnosis is provided.
+
+---
+
+# 🧠 Insight Engine
+
+Transforms raw data into actionable observations.
+
+---
+
+## Examples
+
+> Your cramps usually begin 2 days before menstruation.
+
+> Ovulation occurred most frequently between cycle days 15 and 17.
+
+> Sleeping less than 6 hours correlates with increased irritability.
+
+---
+
+## Requirements
+
+Every insight must be:
+
+✅ Data Driven
+
+✅ Explainable
+
+✅ Reproducible
+
+✅ Evidence Based
+
+---
+
+# 📊 Analytics Platform
+
+Blood Whisperer provides advanced health visualization tools.
+
+---
+
+## Trend Analytics
+
+```text
+BBT Trends
+
+Weight Trends
+
+Sleep Trends
+
+Mood Trends
+
+Symptom Trends
+```
+
+---
+
+## Calendar Analytics
+
+```text
+Menstrual Calendar
+
+Fertility Calendar
+
+Symptom Heatmaps
+
+Cycle Comparison Views
+```
+
+---
+
+## Statistical Analysis
+
+```text
+Cycle Length Average
+
+Standard Deviation
+
+Cycle Variability
+
+Fertility Metrics
+
+Health Correlations
+```
+
+---
+
+# 💬 Local Assistant
+
+A privacy-friendly conversational assistant.
+
+---
+
+## Capabilities
+
+```text
+Explain Cycle Phases
+
+Explain Fertility Markers
+
+Interpret User Data
+
+Provide Educational Content
+```
+
+---
+
+## Limitations
+
+The assistant must never:
+
+```text
+Provide Diagnosis
+
+Replace Medical Advice
+
+Prescribe Treatments
+```
+
+---
+
+# 🏛️ System Architecture
+
+The project follows Feature-First Clean Architecture principles.
+
+```text
+Presentation Layer
+│
+├── Features
+│
+├── Riverpod Providers
+│
+├── Repositories
+│
+├── Domain Services
+│
+├── Drift Database
+│
+└── Local Storage
+```
+
+---
+
+## Main Technologies
+
+| Component | Technology |
+|------------|------------|
+| Framework | Flutter |
+| Language | Dart |
+| State Management | Riverpod |
+| Routing | GoRouter |
+| Database | Drift |
+| Encryption | SQLCipher |
+| Local Authentication | local_auth |
+| Secure Storage | flutter_secure_storage |
+| Localization | gen_l10n |
+| Charts | fl_chart |
+
+---
+
+# 🗄️ Database Schema
+
+Core tables:
+
+```text
+UserProfiles
+
+DailyLogs
+
+SymptomEntries
+
+MoodEntries
+
+Cycles
+
+Measurements
+
+SexualActivities
+
+ContraceptionLogs
+
+PregnancyLogs
+
+Appointments
+
+Insights
+
+Settings
+```
+
+Designed for:
+
+- Extensibility
+- Performance
+- Type Safety
+- Future migrations
+
+---
+
+# 🔐 Privacy & Security
+
+## Authentication
+
+```text
+PIN
+
+Fingerprint
+
+Face ID
+
+Biometric Authentication
+```
+
+---
+
+## Encryption
+
+```text
+SQLCipher Database
+
+Encrypted Export
+
+Encrypted Import
+
+Encrypted Backup
+```
+
+---
+
+## Data Ownership
+
+Users can:
+
+✅ Export their data
+
+✅ Backup their data
+
+✅ Delete their data
+
+✅ Remain completely offline
+
+---
+
+# ♿ Accessibility
+
+Blood Whisperer aims to be accessible to all users.
+
+Features include:
+
+- Dark Mode
+- Dynamic Colors
+- High Contrast
+- Large Text Support
+- Screen Reader Support
+- Semantic Labels
+- Keyboard Navigation
+
+---
+
+# 🌍 Internationalization
+
+Current Languages:
+
+- 🇮🇹 Italian
+- 🇬🇧 English
+
+Planned Languages:
+
+- 🇪🇸 Spanish
+- 🇫🇷 French
+- 🇩🇪 German
+- 🇵🇹 Portuguese
+
+---
+
+# 🧪 Quality & Testing
+
+Required testing strategy:
+
+## Unit Tests
+
+- Algorithms
+- Services
+- Repositories
+
+## Widget Tests
+
+- Forms
+- Screens
+- Navigation
+
+## Integration Tests
+
+- Onboarding
+- Logging Flow
+- Fertility Flow
+
+## Database Tests
+
+- DAO
+- Repositories
+- Migrations
+
+Target coverage:
+
+```text
+≥ 80%
+```
+
+---
+
+# 🗺️ Development Roadmap
+
+## v1.0 – Core Platform
+
+✅ Cycle Tracking
+
+✅ Fertility Engine
+
+✅ Pregnancy Module
+
+✅ Contraception Tracking
+
+✅ Sexual Health Tracking
+
+✅ Analytics Dashboard
+
+✅ Local Assistant
+
+---
+
+## v1.5 – Intelligence Layer
+
+🚧 Advanced Insights
+
+🚧 Correlation Engine
+
+🚧 PDF Health Reports
+
+🚧 Personalized Trends
+
+---
+
+## v2.0 – Ecosystem Expansion
+
+🚧 End-to-End Encrypted Sync
+
+🚧 Health Connect
+
+🚧 Apple Health
+
+🚧 Wearable Integration
+
+🚧 Multi-Device Support
+
+---
+
+## v3.0 – Future Research
+
+🚧 On-Device AI
+
+🚧 Personalized Predictive Models
+
+🚧 Advanced Fertility Forecasting
+
+🚧 Intelligent Health Recommendations
+
+---
+
+# 🚀 Final Goal
+
+Blood Whisperer aims to become the most complete privacy-first reproductive health platform available.
+
+A platform that combines:
+
+🩸 Cycle Tracking
+
+🪺 Fertility Awareness
+
+💊 Contraception Management
+
+🤰 Pregnancy Monitoring
+
+🍂 Perimenopause Support
+
+❤️ Sexual Health
+
+📊 Advanced Analytics
+
+🔒 Full Data Ownership
+
+into a single transparent, explainable and user-controlled ecosystem.
+
+---
+
+# ⚠️ Medical Disclaimer
+
+**Blood Whisperer is an informational and self-monitoring application.**
+
+The application does not provide medical diagnoses, treatments or professional healthcare services.
+
+Always consult qualified healthcare professionals for medical concerns regarding reproductive health, fertility, pregnancy or hormonal conditions.
+
+---
+
+# 📄 License
+
+Distributed under the **MIT License**.
+
+See `LICENSE` for more information.
+
+---
+
+## 👨‍💻 Author
+
+**Gioele Valzolgher**
+
+Made with ❤️ and Flutter.
